@@ -2,57 +2,150 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Multiple Choice Questions</title>
-    <style>
-        body {
-            background-color: rgb(1, 194, 194)
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Multiple Choice Questions</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+    body {
+        background-color: rgb(1, 194, 194)
+    }
 
-        #container {
-            width: 440px;
-            margin: 0px auto;
-            background-color: azure;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .form-row {
-            margin: 20px;
-        }
-
-        .form-label {
-            margin: 10px 0;
-        }
-
-        input[type=text] {
-            width: 400px;
-            height: 20px;
-        }
-    </style>
+    #container {
+         width: 850px;
+         margin: 0px auto;
+         background-color: azure;
+         padding: 20px;
+         border-radius: 8px;
+    }
+    
+    .form-row {
+        height: 30px; 
+        width:120px;
+        border-radius: 5px;
+        background-color: blue;
+        color: whitesmoke;
+    }
+</style>
 </head>
 
 <body>
-    <div id="container">
-        <h2>Multiple Choice Questions</h2>
-        <form action="process.php" method="POST">
-            <div class="form-row">
-                <div class="form-label">
-                    <label for="first_name_id">First Name</label>
-                </div>
+<form action="process.php" method="POST" id="boxes">
+<div id="container">
+<h2>Multiple Choice Questions</h2>
+<p></p>
+    <p>1. What is the advantage of agile development?</p>
+     <fieldset id="group1" style="margin: 1% 2%">
+        <input type="radio" name="group1" value="1" > A1<br>
+        <input type="radio" name="group1" value="2"> A2<br>
+        <input type="radio" name="group1" value="4"> A3<br>
+        <input type="radio" name="group1" value="4"> A4
+        <p></p>
+    </fieldset>
+    
+    <p> 2. What do you want to order?</p>
+    <fieldset id="group2" style="margin: 1% 2%">
+        <input type="radio" name="group2" value="1" > Latte<br>
+        <input type="radio" name="group2" value="2"> Americano<br>
+        <input type="radio" name="group2" value="4"> Laksa<br>
+        <input type="radio" name="group2" value="4"> Fish cake
+        <p></p>
+    </fieldset>
+   
+    <p>3. Which is NOT true about Docker Containers?</p>
+     <fieldset id="group3" style="margin: 1% 2%">
+        <input type="radio" name="group3" value="1" > N<br>
+        <input type="radio" name="group3" value="2"> F<br>
+        <input type="radio" name="group3" value="4"> FP<br>
+        <input type="radio" name="group3" value="4"> Other
+        <p></p>
+    </fieldset>
 
-                <div>
-                    <input type="text" name="firstName" id="first_name_id">
-                </div>
-            </div>
 
-            <div class="form_row" style="text-align: center;">
-                <button type="reset">Reset</button> <button type="submit">Submission</button>
-            </div>
-        </form>
+    <p>4. Which is fact about Docker cloud computing?</p>
+    <fieldset id="group4" style="margin: 1% 2%">
+        <input type="radio" name="group4" value="1" > dhsdio<br>
+        <input type="radio" name="group4" value="2"> clodu<br>
+        <input type="radio" name="group4" value="4"> docker<br>
+        <input type="radio" name="group4" value="4"> Other
+        <p></p>
+    </fieldset>
+    
+    <p>5. Which cloud service is most flexible to choose language, platform and frameworks for software? </p>
+    <fieldset id="group5" style="margin: 1% 2%">
+        <input type="radio" name="group5" value="1" > IaaS<br>
+        <input type="radio" name="group5" value="2"> PaaS<br>
+        <input type="radio" name="group5" value="4"> DaaS<br>
+        <input type="radio" name="group5" value="4"> SaaS
+        <p></p>
+    </fieldset>
+    
+    <p>6. Which cloud service is most flexible to choose language, platform and frameworks for software? </p>
+    <fieldset id="group6" style="margin: 1% 2%">
+        <input type="radio" name="group6" value="1" > IaaS<br>
+        <input type="radio" name="group6" value="2"> PaaS<br>
+        <input type="radio" name="group6" value="4"> DaaS<br>
+        <input type="radio" name="group6" value="4"> SaaS
+        <p></p>
+    </fieldset>
+    
+    <p>7. Which cloud service is most flexible to choose language, platform and frameworks for software? </p>
+    <fieldset id="group6" style="margin: 1% 2%">
+        <input type="radio" name="group7" value="1" > IaaS<br>
+        <input type="radio" name="group7" value="2"> PaaS<br>
+        <input type="radio" name="group7" value="4"> DaaS<br>
+        <input type="radio" name="group7" value="4"> SaaS
+        <p></p>
+    </fieldset>
+    
+    <p>8. W fqwwwwnt?</p>
+    
+    <fieldset id="group8" style="margin: 1% 2%">
+        <input type="radio" name="group8" value="1" > A1<br>
+        <input type="radio" name="group8" value="2"> A2<br>
+        <input type="radio" name="group8" value="4"> A3<br>
+        <input type="radio" name="group8" value="4"> A4
+        <p></p>
+    </fieldset>
+    
+    <p>9. Wkebtlqepqo ht?</p>
+    
+    <fieldset id="group9" style="margin: 1% 2%">
+        <input type="radio" name="group9" value="1" > 1<br>
+        <input type="radio" name="group9" value="2"> 2<br>
+        <input type="radio" name="group9" value="4"> 3<br>
+        <input type="radio" name="group9" value="4"> Other
+        <p></p>
+    </fieldset>
+    
+     <p>10. pyapyapya</p>
+     <fieldset id="group10" style="margin: 1% 2%">
+        <input type="radio" name="group10" value="1" > A1<br>
+        <input type="radio" name="group10" value="2"> A2<br>
+        <input type="radio" name="group10" value="4"> A3<br>
+        <input type="radio" name="group10" value="4"> A4
+        <p></p>
+    </fieldset>
+
+    <p></p>
+    
+    <div class="form_row" style="text-align: center;">
+    <button class="btn btn-danger" style="margin:4px; font-size: 15px" type="reset" onclick="resetAll()">Reset</button>
+    <button class="btn btn-primary" style="margin:4px; font-size: 15px" type="submit">Submit</button>
     </div>
+</div>
+    </form>  
+<script>
+    $(document ).ready(function() {
+    console.log( "Yeah" );
+});
+
+function resetAll() {
+   $('input[name="group"]').prop('checked', false);
+}
+</script>
 </body>
 
-</html>

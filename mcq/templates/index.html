@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Multiple Choice Questions</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <style>
         body {
             background-color: rgb(1, 194, 194)
@@ -19,40 +22,150 @@
             border-radius: 8px;
         }
 
-        .form-row {
-            margin: 20px;
-        }
-
-        .form-label {
-            margin: 10px 0;
-        }
-
-        input[type=text] {
-            width: 400px;
-            height: 20px;
+        .question {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
     <div id="container">
-        <h2>Multiple Choice Questions</h2>
-        <form action="process.php" method="POST">
-            <div class="form-row">
-                <div class="form-label">
-                    <label for="first_name_id">First Name</label>
-                </div>
+        <h2 style="margin-bottom: 10px;">Multiple Choice Questions</h2>
+        <h4 style="margin-bottom: 20px;">Topic: {{module.module_name}}</h4>
+        <form action="" method="POST" id="boxes">
+            <div class="question">
+                {% for qn in question|slice:1 %}
+                <p>1. {{qn.question_text}}</p>
+                <fieldset id="group1" style="margin: 1% 2%">
+                    <input type="radio" name="group1" value="1"> 1</input><br></input>
+                    <input type="radio" name="group1" value="2"> 2</input><br>
+                    <input type="radio" name="group1" value="4"> 3</input><br>
+                    <input type="radio" name="group1" value="4"> 4</input>
+                </fieldset>
+                {% endfor %}
+            </div>
 
-                <div>
-                    <input type="text" name="firstName" id="first_name_id">
-                </div>
+            <div class="question">
+                {% for qn in question|slice:"1:2" %}
+                <p> 2. {{qn.question_text}}</p>
+                <fieldset id="group2" style="margin: 1% 2%">
+                    <input type="radio" name="group2" value="1"> Latte<br>
+                    <input type="radio" name="group2" value="2"> Americano<br>
+                    <input type="radio" name="group2" value="4"> Laksa<br>
+                    <input type="radio" name="group2" value="4"> Fish cake
+                </fieldset>
+                {% endfor %}
+            </div>
+
+            <div class="question">
+                {% for qn in question|slice:"2:3" %}
+                <p>3.{{qn.question_text}}</p>
+                <fieldset id="group3" style="margin: 1% 2%">
+                    <input type="radio" name="group3" value="1"> N<br>
+                    <input type="radio" name="group3" value="2"> F<br>
+                    <input type="radio" name="group3" value="4"> FP<br>
+                    <input type="radio" name="group3" value="4"> Other
+                </fieldset>
+                {% endfor %}
+            </div>
+
+            <div class="question">
+                {% for qn in question|slice:"3:4" %}
+                <p>4. {{qn.question_text}}</p>
+                <fieldset id="group4" style="margin: 1% 2%">
+                    <input type="radio" name="group4" value="1"> dhsdio<br>
+                    <input type="radio" name="group4" value="2"> clodu<br>
+                    <input type="radio" name="group4" value="4"> docker<br>
+                    <input type="radio" name="group4" value="4"> Other
+                </fieldset>
+                {% endfor %}
+            </div>
+
+            <div class="question">
+                {% for qn in question|slice:"4:5" %}
+                <p>5. {{qn.question_text}}</p>
+                <fieldset id="group5" style="margin: 1% 2%">
+                    <input type="radio" name="group5" value="1"> IaaS<br>
+                    <input type="radio" name="group5" value="2"> PaaS<br>
+                    <input type="radio" name="group5" value="4"> DaaS<br>
+                    <input type="radio" name="group5" value="4"> SaaS
+                </fieldset>
+                {% endfor %}
+            </div>
+
+            <div class="question">
+                {% for qn in question|slice:"5:6" %}
+                <p>6. {{qn.question_text}}</p>
+                <fieldset id="group6" style="margin: 1% 2%">
+                    <input type="radio" name="group6" value="1"> IaaS<br>
+                    <input type="radio" name="group6" value="2"> PaaS<br>
+                    <input type="radio" name="group6" value="4"> DaaS<br>
+                    <input type="radio" name="group6" value="4"> SaaS
+                </fieldset>
+                {% endfor %}
+            </div>
+
+            <div class="question">
+                {% for qn in question|slice:"6:7" %}
+                <p>7. {{qn.question_text}}</p>
+                <fieldset id="group7" style="margin: 1% 2%">
+                    <input type="radio" name="group7" value="1"> IaaS<br>
+                    <input type="radio" name="group7" value="2"> PaaS<br>
+                    <input type="radio" name="group7" value="4"> DaaS<br>
+                    <input type="radio" name="group7" value="4"> SaaS
+                </fieldset>
+                {% endfor %}
+            </div>
+
+            <div class="question">
+                {% for qn in question|slice:"7:8" %}
+                <p>8. {{qn.question_text}}</p>
+                <fieldset id="group8" style="margin: 1% 2%">
+                    <input type="radio" name="group8" value="1"> A1<br>
+                    <input type="radio" name="group8" value="2"> A2<br>
+                    <input type="radio" name="group8" value="4"> A3<br>
+                    <input type="radio" name="group8" value="4"> A4
+                </fieldset>
+                {% endfor %}
+            </div>
+
+            <div class="question">
+                {% for qn in question|slice:"8:9" %}
+                <p>9. {{qn.question_text}}</p>
+                <fieldset id="group9" style="margin: 1% 2%">
+                    <input type="radio" name="group9" value="1"> 1<br>
+                    <input type="radio" name="group9" value="2"> 2<br>
+                    <input type="radio" name="group9" value="4"> 3<br>
+                    <input type="radio" name="group9" value="4"> Other
+                </fieldset>
+                {% endfor %}
+            </div>
+
+            <div class="question">
+                {% for qn in question|slice:"9:10" %}
+                <p>10. {{qn.question_text}}</p>
+                <fieldset id="group10" style="margin: 1% 2%">
+                    <input type="radio" name="group10" value="1"> A1<br>
+                    <input type="radio" name="group10" value="2"> A2<br>
+                    <input type="radio" name="group10" value="4"> A3<br>
+                    <input type="radio" name="group10" value="4"> A4
+                </fieldset>
+                {% endfor %}
             </div>
 
             <div class="form_row" style="text-align: center;">
-                <button type="reset">Reset</button> <button type="submit">Submission</button>
+                <button class="btn btn-danger" style="margin:4px; font-size: 15px" type="reset"
+                    onclick="resetAll()">Reset</button>
+                <button class="btn btn-primary" style="margin:4px; font-size: 15px" type="submit">Submit</button>
             </div>
         </form>
     </div>
+
+    <script>
+        function resetAll() {
+            window.location.reload();
+        }
+    </script>
 </body>
 
 </html>

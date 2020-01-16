@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django.db import models
 
 class Module(models.Model):
@@ -14,3 +15,6 @@ class Choice(models.Model):
     choice_text3 = models.CharField(max_length=200, null=True)
     choice_text4 = models.CharField(max_length=200, null=True)
     answer_text = models.CharField(max_length=200, null=True)
+
+class Score(models.Model):
+    score = models.IntegerField(default=0)

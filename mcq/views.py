@@ -13,7 +13,7 @@ def index(request):
     template = loader.get_template('index.html')
     context = {}
 
-    # get module id list from module table, and shuffle to get an id
+    # get all module id list from module table, and shuffle to get an id
     module = Module.objects.all()
     module_id = []
 
@@ -24,12 +24,20 @@ def index(request):
     first_module_id = module_id[0]
     context["module"] = module.get(id=first_module_id)
 
-    # use module id to retrieve all the questions from questions table
-    question = list(Question.objects.all().filter(module_under_id=first_module_id))
-    random.shuffle(question)
-    context["question"] = question
+    # use module id to retrieve all relevant questions from questions table, and shuffle
+    questions = list(Question.objects.filter(module_under_id=first_module_id))
+    random.shuffle(questions)
+    context["question"] = questions
 
     # get the choice based on question id
-    
+    question_choice = []
+    question_id = []
+    for i in questions:
+        question_id.append(i.id)
+
+    for i in question_id:
+        question_choice.append(list(Choice.objects.filter(question_under_id=i)))
+
+    context['choice'] = question_choice
 
     return HttpResponse(template.render(context, request))

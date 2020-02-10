@@ -17,8 +17,8 @@
 
         #scoreBoard {
             float: left;
-            width: 300px;
-            margin-left: 50px;
+            width: 18%;
+            margin-left: 2.2%;
             background-color: azure;
             padding: 20px;
             border-radius: 8px;
@@ -30,8 +30,8 @@
             border-top: 1px solid lightgrey;
         }
 
-        #container {
-            width: 600px;
+        #question_title {
+            width: 55%;
             margin: 20px auto;
             background-color: azure;
             padding: 20px;
@@ -54,9 +54,9 @@
 
         .fixedElement {
             float: right;
-            width: 180px;
+            width: 18.5%;
             margin-top: 20px;
-            margin-left: 75.5%;
+            margin-left: 79.5%;
             background-color: azure;
             padding: 20px;
             border-radius: 8px;
@@ -69,15 +69,15 @@
   
 <body>
     <div id="scoreBoard">
-        <label style="font-weight: bold;">Highest Score</label><br>
-        <div class="col top-separator-line">
-            <label class="row" style="padding-top: 5px;" for="">1. Joseph 10/10</label>
-            <label class="row" for="">2. Joe 9/10</label>
-            <label class="row" for="">3. Ron 8/10</label>
+        <label style="font-weight: bold;">Highest Score <br> (Based on topic)</label><br>
+        <div id="mydiv" class="col top-separator-line">
+            <label id="string1" name="string" class="row" style="padding-top: 5px;" for=""></label>
+            <label id="string2" name="string" class="row" for=""></label>
+            <label id="string3" name="string" class="row" for=""></label>
         </div>
     </div>
 
-    <div id="container">
+    <div id="question_title">
         <h2 id="title">Multiple Choice Questions</h2>
         <h4 id="module_name">Topic: {{module.module_name}}</h4>
 
@@ -277,14 +277,49 @@
     <div class="fixedElement">
         <label id="score" for="score"><span style="font-weight: bold;">Score</span>: 0/10</label>
     </div>
-
+    
     <script>
+        function postJSON(csrftoken, url, postData, onsuccess, onerror) {
+            $.ajax({
+                type: POST,
+                headers: { "X-CSRFToken": csrftoken },
+                url: url,
+                data: JSON.stringify(postData),
+                success: function (data) {
+                    onsuccess(data)
+                },
+                error: function (err) {
+                    onerror(err)
+                },
+                contentType: 'application/json;',
+                dataType: 'json'
+            });
+        }
+        
         function resetAll() {
             window.location.reload();
             $(document).ready(function(){
                 $(this).scrollTop(0);
             });
         }
+
+        $(document).ready(function(){
+            var count = 0
+            {% for s in highestScore %}
+                if (count < 3) {
+                    count++;
+                    if (count == 1) {
+                        $('#mydiv label').text(count.toString() + "." + " {{s.player}} {{s.score}}/10");
+                    }
+                    if (count == 2) {
+                        $('#mydiv label:eq(1)').text(count.toString() + "." + " {{s.player}} {{s.score}}/10");
+                    }
+                    if (count == 3) {
+                        $('#mydiv label:eq(2)').text(count.toString() + "." + " {{s.player}} {{s.score}}/10");
+                    }
+                }
+            {% endfor %}
+        });
 
         // store each selected choice
         var answer1 = $('#answer0').val()
@@ -302,21 +337,21 @@
         tot = answers.length;
 
         // compare the answer one by one
-        function getCheckedValue( radioName ){
+        function getCheckedValue( radioName ) {
             var radios = document.getElementsByName( radioName ); // Get radio group by-name
             for(var y=0; y<radios.length; y++)
             if(radios[y].checked) return radios[y].value; // return the checked value
         }
 
         // store the score once the answer correct
-        function getScore(){
+        function getScore() {
             var score = 0;
             for (var i=0; i<tot; i++)
                 if(getCheckedValue("group"+i)===answers[i]) score += 1; // increment only
             return score;
         }
 
-        function returnScore(){
+        function returnScore() {
             document.getElementById("score").innerHTML = "Your score is "+ getScore() +"/"+ tot;
         }
     </script>

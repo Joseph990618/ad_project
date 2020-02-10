@@ -40,6 +40,10 @@ def index(request):
 
     context['choice'] = question_choice
 
-    
+    highestScore = Score.objects.all()
+
+    context['highestScore'] = highestScore
 
     return HttpResponse(template.render(context, request))
+
+# def submit_result(request):

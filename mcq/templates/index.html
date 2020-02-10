@@ -8,11 +8,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Multiple Choice Questions</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             background: rgb(1, 194, 194)
+        }
+
+        span {
+            font-weight: bold;
         }
 
         #scoreBoard {
@@ -28,6 +32,10 @@
 
         .top-separator-line {
             border-top: 1px solid lightgrey;
+        }
+
+        #label1 {
+            padding-top: 5px;
         }
 
         #question_title {
@@ -48,8 +56,32 @@
             text-align: center;
         }
 
+        .spacing {
+            padding-top: 15px;
+        }
+
         .question {
             margin-bottom: 20px;
+        }
+
+        .options {
+            margin: 1% 2%;
+        }
+
+        #btnRow {
+            text-align: center;
+        }
+
+        .btn-danger,
+        .btn-primary {
+            font-size: 15px;
+            font-weight: bold;
+            width: 100px;
+            height: 40px;
+        }
+
+        .btn-danger {
+            margin-right: 10px;
         }
 
         .fixedElement {
@@ -69,9 +101,9 @@
   
 <body>
     <div id="scoreBoard">
-        <label style="font-weight: bold;">Highest Score <br> (Based on topic)</label><br>
+        <label for=""><span>Highest Score <br> (Based on topic) </span><br></label>
         <div id="mydiv" class="col top-separator-line">
-            <label id="label1" class="row" for="highest_score1" style="padding-top: 5px;" >No record...</label>
+            <label id="label1" class="row" for="highest_score1">No record...</label>
             <label id="label2" class="row" for="highest_score2"></label>
             <label id="label3" class="row" for="highest_score3"></label>
         </div>
@@ -81,11 +113,11 @@
         <h2 id="title">Multiple Choice Questions</h2>
         <h4 id="module_name">Topic: {{module.module_name}}</h4>
 
-        <div class="question">
+        <div class="question top-separator-line spacing">
             {% for qn in question|slice:"0:1" %}
             <p>1. {{qn.question_text}}</p>
                 {% for c in choice|first %}
-                <fieldset style="margin: 1% 2%">
+                <fieldset class="options">
                     <input type="radio" name="group0" value="{{c.choice_text1}}"> {{c.choice_text1}}</input><br>
                     <input type="radio" name="group0" value="{{c.choice_text2}}"> {{c.choice_text2}}</input><br>
                     <input type="radio" name="group0" value="{{c.choice_text3}}"> {{c.choice_text3}}</input><br>
@@ -102,7 +134,7 @@
                 {% for c in choice %}
                     {% for i in c %}
                         {% if qn.id == i.id %}
-                        <fieldset style="margin: 1% 2%">
+                        <fieldset class="options">
                             <input type="radio" name="group1" value="{{i.choice_text1}}"> {{i.choice_text1}}</input><br>
                             <input type="radio" name="group1" value="{{i.choice_text2}}"> {{i.choice_text2}}</input><br>
                             <input type="radio" name="group1" value="{{i.choice_text3}}"> {{i.choice_text3}}</input><br>
@@ -121,7 +153,7 @@
                 {% for c in choice %}
                     {% for i in c %}
                         {% if qn.id == i.id %}
-                        <fieldset style="margin: 1% 2%">
+                        <fieldset class="options">
                             <input type="radio" name="group2" value="{{i.choice_text1}}"> {{i.choice_text1}}</input><br>
                             <input type="radio" name="group2" value="{{i.choice_text2}}"> {{i.choice_text2}}</input><br>
                             <input type="radio" name="group2" value="{{i.choice_text3}}"> {{i.choice_text3}}</input><br>
@@ -140,7 +172,7 @@
                 {% for c in choice %}
                     {% for i in c %}
                         {% if qn.id == i.id %}
-                        <fieldset style="margin: 1% 2%">
+                        <fieldset class="options">
                             <input type="radio" name="group3" value="{{i.choice_text1}}"> {{i.choice_text1}}</input><br>
                             <input type="radio" name="group3" value="{{i.choice_text2}}"> {{i.choice_text2}}</input><br>
                             <input type="radio" name="group3" value="{{i.choice_text3}}"> {{i.choice_text3}}</input><br>
@@ -159,7 +191,7 @@
                 {% for c in choice %}
                     {% for i in c %}
                         {% if qn.id == i.id %}
-                        <fieldset style="margin: 1% 2%">
+                        <fieldset class="options">
                             <input type="radio" name="group4" value="{{i.choice_text1}}"> {{i.choice_text1}}</input><br>
                             <input type="radio" name="group4" value="{{i.choice_text2}}"> {{i.choice_text2}}</input><br>
                             <input type="radio" name="group4" value="{{i.choice_text3}}"> {{i.choice_text3}}</input><br>
@@ -178,7 +210,7 @@
                 {% for c in choice %}
                     {% for i in c %}
                         {% if qn.id == i.id %}
-                        <fieldset style="margin: 1% 2%">
+                        <fieldset class="options">
                             <input type="radio" name="group5" value="{{i.choice_text1}}"> {{i.choice_text1}}</input><br>
                             <input type="radio" name="group5" value="{{i.choice_text2}}"> {{i.choice_text2}}</input><br>
                             <input type="radio" name="group5" value="{{i.choice_text3}}"> {{i.choice_text3}}</input><br>
@@ -197,7 +229,7 @@
                 {% for c in choice %}
                     {% for i in c %}
                         {% if qn.id == i.id %}
-                        <fieldset style="margin: 1% 2%">
+                        <fieldset class="options">
                             <input type="radio" name="group6" value="{{i.choice_text1}}"> {{i.choice_text1}}</input><br>
                             <input type="radio" name="group6" value="{{i.choice_text2}}"> {{i.choice_text2}}</input><br>
                             <input type="radio" name="group6" value="{{i.choice_text3}}"> {{i.choice_text3}}</input><br>
@@ -216,7 +248,7 @@
                 {% for c in choice %}
                     {% for i in c %}
                         {% if qn.id == i.id %}
-                        <fieldset style="margin: 1% 2%">
+                        <fieldset class="options">
                             <input type="radio" name="group7" value="{{i.choice_text1}}"> {{i.choice_text1}}</input><br>
                             <input type="radio" name="group7" value="{{i.choice_text2}}"> {{i.choice_text2}}</input><br>
                             <input type="radio" name="group7" value="{{i.choice_text3}}"> {{i.choice_text3}}</input><br>
@@ -235,7 +267,7 @@
                 {% for c in choice %}
                     {% for i in c %}
                         {% if qn.id == i.id %}
-                        <fieldset style="margin: 1% 2%">
+                        <fieldset class="options">
                             <input type="radio" name="group8" value="{{i.choice_text1}}"> {{i.choice_text1}}</input><br>
                             <input type="radio" name="group8" value="{{i.choice_text2}}"> {{i.choice_text2}}</input><br>
                             <input type="radio" name="group8" value="{{i.choice_text3}}"> {{i.choice_text3}}</input><br>
@@ -254,7 +286,7 @@
                 {% for c in choice %}
                     {% for i in c %}
                         {% if qn.id == i.id %}
-                        <fieldset style="margin: 1% 2%">
+                        <fieldset class="options">
                             <input type="radio" name="group9" value="{{i.choice_text1}}"> {{i.choice_text1}}</input><br>
                             <input type="radio" name="group9" value="{{i.choice_text2}}"> {{i.choice_text2}}</input><br>
                             <input type="radio" name="group9" value="{{i.choice_text3}}"> {{i.choice_text3}}</input><br>
@@ -267,15 +299,14 @@
             {% endfor %}
         </div>
 
-        <div class="form_row" style="text-align: center;">
-            <button class="btn btn-danger" style="margin:4px; font-size: 15px" type="reset"
-                onclick="resetAll()">Reset</button>
-            <button class="btn btn-primary" style="margin:4px; font-size: 15px" onclick="returnScore()">Submit</button>
+        <div class="form_row top-separator-line spacing" id="btnRow">
+            <button class="btn btn-danger" type="reset" onclick="resetAll()">Reset</button>
+            <button class="btn btn-primary" onclick="returnScore()">Submit</button>
         </div>
     </div>
 
     <div class="fixedElement">
-        <label id="score" for="score"><span style="font-weight: bold;">Score</span>: 0/10</label>
+        <label id="score" for="score"><span>Score</span>: 0/10</label>
     </div>
     
     <script>

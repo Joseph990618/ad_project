@@ -71,9 +71,9 @@
     <div id="scoreBoard">
         <label style="font-weight: bold;">Highest Score <br> (Based on topic)</label><br>
         <div id="mydiv" class="col top-separator-line">
-            <label id="string1" name="string" class="row" style="padding-top: 5px;" for=""></label>
-            <label id="string2" name="string" class="row" for=""></label>
-            <label id="string3" name="string" class="row" for=""></label>
+            <label id="label1" class="row" for="highest_score1" style="padding-top: 5px;" >No record...</label>
+            <label id="label2" class="row" for="highest_score2"></label>
+            <label id="label3" class="row" for="highest_score3"></label>
         </div>
     </div>
 
@@ -304,18 +304,19 @@
         }
 
         $(document).ready(function(){
-            var count = 0
+            var count = 1
             {% for s in highestScore %}
-                if (count < 3) {
-                    count++;
-                    if (count == 1) {
-                        $('#mydiv label').text(count.toString() + "." + " {{s.player}} {{s.score}}/10");
+                if (count <= 3) {
+                    if (count == 1 && {{highestScore.count}} >= 1) {
+                        $('#label1').text(count.toString() + "." + " {{s.player}} {{s.score}}/10");
+                        count++;
                     }
-                    if (count == 2) {
-                        $('#mydiv label:eq(1)').text(count.toString() + "." + " {{s.player}} {{s.score}}/10");
+                    else if (count == 2 && {{highestScore.count}} >= 2) {
+                        $('#label2').text(count.toString() + "." + " {{s.player}} {{s.score}}/10");
+                        count++;
                     }
-                    if (count == 3) {
-                        $('#mydiv label:eq(2)').text(count.toString() + "." + " {{s.player}} {{s.score}}/10");
+                    else if (count == 3 && {{highestScore.count}} == 3) {
+                        $('#label3').text(count.toString() + "." + " {{s.player}} {{s.score}}/10");
                     }
                 }
             {% endfor %}

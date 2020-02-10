@@ -9,9 +9,25 @@
     <title>Multiple Choice Questions</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
     <style>
         body {
-            background-color: rgb(1, 194, 194)
+            background: rgb(1, 194, 194)
+        }
+
+        #scoreBoard {
+            float: left;
+            width: 300px;
+            margin-left: 50px;
+            background-color: azure;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            position: fixed;
+        }
+
+        .top-separator-line {
+            border-top: 1px solid lightgrey;
         }
 
         #container {
@@ -22,6 +38,16 @@
             border-radius: 8px;
         }
 
+        #title {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        #module_name {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
         .question {
             margin-bottom: 20px;
         }
@@ -30,7 +56,7 @@
             float: right;
             width: 180px;
             margin-top: 20px;
-            margin-left: 80%;
+            margin-left: 75.5%;
             background-color: azure;
             padding: 20px;
             border-radius: 8px;
@@ -40,13 +66,23 @@
         }
     </style>
 </head>
-
+  
 <body>
+    <div id="scoreBoard">
+        <label style="font-weight: bold;">Highest Score</label><br>
+        <div class="col top-separator-line">
+            <label class="row" style="padding-top: 5px;" for="">1. Joseph 10/10</label>
+            <label class="row" for="">2. Joe 9/10</label>
+            <label class="row" for="">3. Ron 8/10</label>
+        </div>
+    </div>
+
     <div id="container">
-        <h2 style="margin-bottom: 10px; text-align: center;">Multiple Choice Questions</h2>
-        <h4 style="margin-bottom: 20px; text-align: center;">Topic: {{module.module_name}}</h4>
+        <h2 id="title">Multiple Choice Questions</h2>
+        <h4 id="module_name">Topic: {{module.module_name}}</h4>
+
         <div class="question">
-            {% for qn in question|slice:1 %}
+            {% for qn in question|slice:"0:1" %}
             <p>1. {{qn.question_text}}</p>
                 {% for c in choice|first %}
                 <fieldset style="margin: 1% 2%">
@@ -239,14 +275,18 @@
     </div>
 
     <div class="fixedElement">
-        <label id="score" for="score">Score: 0/10</label>
+        <label id="score" for="score"><span style="font-weight: bold;">Score</span>: 0/10</label>
     </div>
 
     <script>
         function resetAll() {
             window.location.reload();
+            $(document).ready(function(){
+                $(this).scrollTop(0);
+            });
         }
 
+        // store each selected choice
         var answer1 = $('#answer0').val()
         var answer2 = $('#answer1').val()
         var answer3 = $('#answer2').val()
@@ -261,12 +301,14 @@
         var answers = [answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10] 
         tot = answers.length;
 
+        // compare the answer one by one
         function getCheckedValue( radioName ){
             var radios = document.getElementsByName( radioName ); // Get radio group by-name
             for(var y=0; y<radios.length; y++)
             if(radios[y].checked) return radios[y].value; // return the checked value
         }
 
+        // store the score once the answer correct
         function getScore(){
             var score = 0;
             for (var i=0; i<tot; i++)

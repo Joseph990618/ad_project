@@ -40,4 +40,6 @@ def index(request):
 
     context['choice'] = question_choice
 
+    
+
     return HttpResponse(template.render(context, request))

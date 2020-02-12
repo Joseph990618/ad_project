@@ -101,6 +101,12 @@
             top: 0;
             text-align: center;
         }
+
+        .correct-ans img,
+        .incorrect-ans img{
+            width: 50px;
+            height: 50px;
+        }
     </style>
 </head>
 
@@ -154,6 +160,14 @@
                         <input type="radio" name="group0" value="{{c.choice_text4}}"> {{c.choice_text4}}</input>
                         <input type="radio" id="answer0" value="{{c.answer_text}}" hidden></input>
                     </fieldset>
+                    <div class="correct-ans" >
+                        <img src="correct-icon.png" alt="correct-icon">
+                        <label for="correct-answer">You are CORRECT!</label>
+                    </div>
+                    <div class="incorrect-ans" >
+                        <img src="incorrect-icon.png" alt="incorrect-icon">
+                        <label for="correct-answer">You are WRONG! The answer is {{c.answer_text}}!</label>
+                    </div>
                 {% endfor %}
             {% endfor %}
         </div>

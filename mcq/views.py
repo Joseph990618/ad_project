@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.template import loader
 from django.forms.models import model_to_dict
 
 from .models import *
 import random
+import json
 
 # Create your views here.
 
@@ -45,4 +46,12 @@ def index(request):
     
     return HttpResponse(template.render(context, request))
 
-# def submit_result(request):
+def submit_result(request):
+    jsonLoad = json.loads(request.body)
+    moduleId = jsonLoad['moduleId']
+    Id = Module.objects.get(id=moduleId).pk
+    playerName = jsonLoad['playerName']
+    finalResult = jsonLoad['finalResult']
+    record = Score(score=finalResult, player=playerName, module_under_id=Id)
+    record.save()
+    return JsonResponse({"success": True})

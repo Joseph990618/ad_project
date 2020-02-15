@@ -17,4 +17,6 @@ class Choice(models.Model):
     answer_text = models.CharField(max_length=200, null=True)
 
 class Score(models.Model):
+    module_under = models.ForeignKey(Module, on_delete=models.SET_NULL, null=True)
+    player = models.CharField(max_length=200, null=True)
     score = models.IntegerField(default=0)

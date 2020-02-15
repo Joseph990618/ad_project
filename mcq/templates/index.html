@@ -78,7 +78,7 @@
         }
 
         .btn-danger,
-        .btn-primary {
+        .btn-submit {
             font-size: 15px;
             font-weight: bold;
             width: 100px;
@@ -102,21 +102,19 @@
             text-align: center;
         }
 
-        .correct-ans img,
-        .incorrect-ans img{
-            width: 50px;
-            height: 50px;
+        .correct-ans,
+        .incorrect-ans{
+            display: none;
         }
     </style>
 </head>
 
 <body>
-    <div class="modal fade" id="myModal" name="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="myModal" name="myModal"tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLongTitle">Welcome Player!</h3>
+                    <h3 class="modal-title">Welcome Player!</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -136,6 +134,31 @@
         </div>
     </div>
 
+    <!-- <div class="modal fade" id="myModal" name="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLongTitle">Welcome Player!</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="padding: 20px;">
+                        <label for="name_label" style="font-size: 15px;">Please enter your name:</label>
+                        <input type="text" id="player" style="border-radius: 8px; width: 180px;">
+                        <label for="tips" style="font-size: 12px;">Tips: Stay anonymous, if you do not want to let other knows...</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" style="font-weight: normal;" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" style="font-weight: normal;" onclick="set_name()" data-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
     <div id="scoreBoard">
         <label for=""><span style="font-weight: bold;">Highest Score <br> (Based on topic) </span><br></label>
         <div id="mydiv" class="col top-separator-line">
@@ -144,6 +167,23 @@
             <label id="label3" class="row" for="highest_score3"></label>
         </div>
     </div>
+
+    <!-- <div name="myRadioButtons" class="row">
+        <input id="{{ans.first_choice}}" type="radio" name="one" value="{{ans.correct_answer}}" onclick="">
+            <label for="first">{{ans.first_choice}}</label>
+        </input>
+        <input id="{{ans.second_choice}}" type="radio" name="one" value="{{ans.correct_answer}}" onclick="">
+            <label for="second">{{ans.second_choice}}</label>
+        </input>
+        <input id="{{ans.third_choice}}" type="radio" name="one" value="{{ans.correct_answer}}" onclick="">
+            <label for="third">{{ans.third_choice}}</label>
+        </input>
+        <input id="{{ans.fourth_choice}}" type="radio" name="one" value="{{ans.correct_answer}}" onclick="">
+            <label for="fourth">{{ans.fourth_choice}}</label>
+        </input>
+        <div id="right1" name="right1" hidden><span class="glyphicon glyphicon-ok"></span></div>
+        <div id="wrong1" name="wrong1" hidden><span id="wrong" class="glyphicon glyphicon-remove"></span></div>
+    </div> -->
 
     <div id="question_title">
         <h2 id="title">Multiple Choice Questions</h2>
@@ -160,17 +200,39 @@
                         <input type="radio" name="group0" value="{{c.choice_text4}}"> {{c.choice_text4}}</input>
                         <input type="radio" id="answer0" value="{{c.answer_text}}" hidden></input>
                     </fieldset>
-                    <div class="correct-ans" >
-                        <img src="correct-icon.png" alt="correct-icon">
-                        <label for="correct-answer">You are CORRECT!</label>
-                    </div>
-                    <div class="incorrect-ans" >
-                        <img src="incorrect-icon.png" alt="incorrect-icon">
-                        <label for="correct-answer">You are WRONG! The answer is {{c.answer_text}}!</label>
-                    </div>
+                    <label class="correct-ans" for="correct-ans">✔️ You are CORRECT!</label>
+                    <label class="incorrect-ans" for="incorrect-ans">✖️ You are WRONG! The answer is {{c.answer_text}}!</label>
                 {% endfor %}
             {% endfor %}
         </div>
+
+        <!-- <div class="question">
+            {% for qn in question|slice:"1:2" %}
+                <p>2. {{qn.question_text}}</p>
+                {% for c in choice %}
+                    {% for i in c %}
+                        {% if qn.id == i.id %}
+                            <div name="myRadioButtons" class="row">
+                                <input id="{{c.choice_text1}}" type="radio" name="one" value="{{c.answer_text}}" onclick="">
+                                    <label for="first">{{c.choice_text1}}</label>
+                                </input>
+                                <input id="{{c.choice_text2}}" type="radio" name="one" value="{{c.answer_text}}" onclick="">
+                                    <label for="second">{{c.choice_text2}}</label>
+                                </input>
+                                <input id="{{c.choice_text3}}" type="radio" name="one" value="{{c.answer_text}}" onclick="">
+                                    <label for="third">{{c.choice_text3}}</label>
+                                </input>
+                                <input id="{{c.choice_text4}}" type="radio" name="one" value="{{c.answer_text}}" onclick="">
+                                    <label for="fourth">{{c.choice_text4}}</label>
+                                </input>
+                                <div id="right1" name="right1" hidden><span class="glyphicon glyphicon-ok"></span></div>
+                                <div id="wrong1" name="wrong1" hidden><span id="wrong" class="glyphicon glyphicon-remove"></span></div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        </div> -->
 
         <div class="question">
             {% for qn in question|slice:"1:2" %}
@@ -345,7 +407,7 @@
 
         <div class="form_row top-separator-line spacing" id="btnRow">
             <button class="btn btn-danger" type="reset" onclick="resetAll()">Reset</button>
-            <button class="btn btn-primary" onclick="returnScore(); submit();">Submit</button>
+            <button class="btn btn-primary btn-submit" onclick="returnScore(); submit();">Submit</button>
         </div>
     </div>
 
@@ -434,6 +496,25 @@
 
         var answers = [answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10]
         tot = answers.length;
+
+        // $('#my_radio_box').change(function () {
+        //     var number1 = document.getElementsByName('one');
+        //     var len1 = number1.length
+        //     for (i = 0; i < len1; i++) {
+        //         if (number1[i].checked) {
+        //             for (e = 0; e < number1.length; e++) {
+        //                 number1[e].disabled = true;
+        //         }
+        //         if (number1[i].id == number1[i].value) {
+        //             $('#right1').show();
+        //             $('#wrong1').hide();
+        //         }
+        //         else {
+        //             $('#right1').hide();
+        //             $('#wrong1').show();
+        //         }
+        //     }
+        // }
 
         // compare the answer one by one
         function getCheckedValue(radioName) {
